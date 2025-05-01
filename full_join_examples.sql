@@ -35,10 +35,23 @@ characters c
 on c.character_id=a.current_tenant_id
 and c.character_id is null;
 
-
-
 -- Using the FULL JOIN result to find both unmatched cases
 
+select c.character_id, concat(c.first_name,' ',c.last_name) as full_name, c.occupation,
+a.apartment_number, a.building_address, a.monthly_rent from 
+apartments_full a
+left join 
+characters c 
+on c.character_id=a.current_tenant_id
+and a.current_tenant_id is null 
+union 
+select c.character_id, concat(c.first_name,' ',c.last_name) as full_name, c.occupation,
+a.apartment_number, a.building_address, a.monthly_rent from 
+apartments_full a
+right join 
+characters c
+on c.character_id=a.current_tenant_id
+and a.current_tenant_id is null;
 
 select * from characters;
 select * from apartments_full;
