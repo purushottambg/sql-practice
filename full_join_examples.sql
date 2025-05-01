@@ -27,7 +27,14 @@ on
 a.current_tenant_id=c.character_id
 and a.apartment_number is null;
 
--- Finding only apartments without tenants
+-- Find only apartments without tenants
+select a.apartment_number, a.building_address, c.occupation, a.monthly_rent, c.character_id 
+from apartments_full a
+left join 
+characters c
+on c.character_id=a.current_tenant_id
+and c.character_id is null;
+
 
 
 -- Using the FULL JOIN result to find both unmatched cases
