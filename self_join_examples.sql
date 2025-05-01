@@ -19,6 +19,14 @@ e.employee_id=m.manager_id;
 -- EXAMPLE 2: Self JOIN with LEFT JOIN to include all employees (including CEO with no manager)
 -- This ensures even employees without managers (like the CEO) are included in results
 
+select e.employee_id, concat(e.first_name,' ',e.last_name) as employee_name, m.employee_id as manager_id, concat(m.first_name,' ',m.last_name) 
+as manager_name, e.job_title, e.department, e.salary
+from employees e
+left join 
+employees m
+on
+e.employee_id=m.manager_id;
+
 
 -- EXAMPLE 3: Group employees by department
 -- Not a self join, but useful for context
