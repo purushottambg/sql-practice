@@ -45,4 +45,6 @@ e.employee_id=m.manager_id;
 -- This shows how to use aggregate functions with self joins
 
 
+
+
 select * from employees;
