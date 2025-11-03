@@ -1,7 +1,6 @@
 /**
  INNER JOIN Things to Note
-
-        1. INNER join excludes the NULL value rows in the join columns
+	1. INNER join excludes the NULL value rows in the join columns
     2. If you want to include them, must use LEFT JOIN or RIGHT JOIN
     3. Joins are slower and time consuming, better we use indexing, choose only relevant columns only
 */
@@ -20,8 +19,7 @@ order by a.author_id;
 
 select a.author_id, concat(a.first_name, ' ', a.last_name)  as name, count(b.title) as no_of_books_written
 from authors a inner join books b on a.author_id=b.author_id
-group by b.author_id;  -- you nust use group by clause where the aggregation is possible
-
+group by b.author_id;  -- you must use group by clause where the aggregation is required
 
 -- Get books with their authors and categories
 
@@ -46,6 +44,10 @@ books b
 inner join authors a on b.author_id=a.author_id
 where year(curdate())-b.publication_year>70;  -- use where clause when you need to fetch the data once it is fetched
 
-show tables;
-select publication_year from books;
+
+select * from books;
+
+select * from (select title, price, dense_rank() over (order by price desc) as ranking from books)
+as ranked where ranking=2;
+
 

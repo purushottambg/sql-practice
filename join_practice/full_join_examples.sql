@@ -8,7 +8,7 @@ oracle, postgres support full join
 
 
 
--- right full join query to fetch all the records
+-- Write full join query to fetch all the records
 select * from characters c
 left join apartments_full a 
 on c.character_id=a.current_tenant_id
@@ -25,15 +25,15 @@ left join
 apartments_full a 
 on
 a.current_tenant_id=c.character_id
-and a.apartment_number is null;
-
+where a.current_tenant_id is null; 
+ 
 -- Find only apartments without tenants
 select a.apartment_number, a.building_address, c.occupation, a.monthly_rent, c.character_id 
 from apartments_full a
 left join 
 characters c
 on c.character_id=a.current_tenant_id
-and c.character_id is null;
+where c.character_id is null;
 
 -- Using the FULL JOIN result to find both unmatched cases
 
